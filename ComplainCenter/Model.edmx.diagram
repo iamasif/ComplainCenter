@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="560be3bc8565444fa17ebeadbb863327" Name="Diagram1">
+        <EntityTypeShape EntityType="ComplainCenterModel.ComplainStatus" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComplainCenterModel.Location" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComplainCenterModel.PC" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComplainCenterModel.PCStatus" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComplainCenterModel.User" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComplainCenterModel.UserType" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComplainCenterModel.Complain" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="ComplainCenterModel.FK_Complains_ComplainStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="ComplainCenterModel.FK_Complains_Locations" ManuallyRouted="false" />
+        <AssociationConnector Association="ComplainCenterModel.FK_PCs_Locations" ManuallyRouted="false" />
+        <AssociationConnector Association="ComplainCenterModel.FK_Complains_PCs" ManuallyRouted="false" />
+        <AssociationConnector Association="ComplainCenterModel.FK_PCs_PCStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="ComplainCenterModel.FK_Complains_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ComplainCenterModel.FK_Complains_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="ComplainCenterModel.FK_Complains_Users2" ManuallyRouted="false" />
+        <AssociationConnector Association="ComplainCenterModel.FK_Complains_Users3" ManuallyRouted="false" />
+        <AssociationConnector Association="ComplainCenterModel.FK_Complains_Users4" ManuallyRouted="false" />
+        <AssociationConnector Association="ComplainCenterModel.FK_Users_UserTypes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

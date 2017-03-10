@@ -1,0 +1,662 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ComplainCenterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ComplainCenter.dbo.Complains' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Complains">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="text" />
+          <Property Name="ResolvedById" Type="int" />
+          <Property Name="ResolvedDate" Type="date" />
+          <Property Name="AssignedById" Type="int" />
+          <Property Name="AssignedToId" Type="int" />
+          <Property Name="ComplainById" Type="int" />
+          <Property Name="UpdateById" Type="int" />
+          <Property Name="UpdatedDate" Type="date" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" />
+          <Property Name="ComplainDate" Type="date" />
+          <Property Name="LocationId" Type="int" />
+          <Property Name="ComplainStatusId" Type="int" />
+          <Property Name="PCId" Type="int" />
+        </EntityType>
+        <EntityType Name="ComplainStatuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varbinary" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PCs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocationId" Type="int" />
+          <Property Name="PCStatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="PCStatuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="UserTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Complains_ComplainStatuses">
+          <End Role="ComplainStatuses" Type="Self.ComplainStatuses" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComplainStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="ComplainStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_Locations">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_PCs">
+          <End Role="PCs" Type="Self.PCs" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PCs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="PCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="ResolvedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="AssignedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_Users2">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="AssignedToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_Users3">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="ComplainById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_Users4">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="UpdateById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PCs_Locations">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
+          <End Role="PCs" Type="Self.PCs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PCs">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PCs_PCStatuses">
+          <End Role="PCStatuses" Type="Self.PCStatuses" Multiplicity="0..1" />
+          <End Role="PCs" Type="Self.PCs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PCStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PCs">
+              <PropertyRef Name="PCStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserTypes">
+          <End Role="UserTypes" Type="Self.UserTypes" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ComplainCenterModelStoreContainer">
+          <EntitySet Name="ComplainStatuses" EntityType="Self.ComplainStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PCs" EntityType="Self.PCs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PCStatuses" EntityType="Self.PCStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTypes" EntityType="Self.UserTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Complains" EntityType="Self.Complains" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Complains].[Id] AS [Id], 
+[Complains].[Title] AS [Title], 
+[Complains].[Description] AS [Description], 
+[Complains].[ResolvedById] AS [ResolvedById], 
+[Complains].[ResolvedDate] AS [ResolvedDate], 
+[Complains].[AssignedById] AS [AssignedById], 
+[Complains].[AssignedToId] AS [AssignedToId], 
+[Complains].[ComplainById] AS [ComplainById], 
+[Complains].[UpdateById] AS [UpdateById], 
+[Complains].[UpdatedDate] AS [UpdatedDate], 
+[Complains].[Code] AS [Code], 
+[Complains].[ComplainDate] AS [ComplainDate], 
+[Complains].[LocationId] AS [LocationId], 
+[Complains].[ComplainStatusId] AS [ComplainStatusId], 
+[Complains].[PCId] AS [PCId]
+FROM [dbo].[Complains] AS [Complains]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Complains_ComplainStatuses" Association="Self.FK_Complains_ComplainStatuses">
+            <End Role="ComplainStatuses" EntitySet="ComplainStatuses" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_Locations" Association="Self.FK_Complains_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_PCs" Association="Self.FK_Complains_PCs">
+            <End Role="PCs" EntitySet="PCs" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_Users" Association="Self.FK_Complains_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_Users1" Association="Self.FK_Complains_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_Users2" Association="Self.FK_Complains_Users2">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_Users3" Association="Self.FK_Complains_Users3">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_Users4" Association="Self.FK_Complains_Users4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PCs_Locations" Association="Self.FK_PCs_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="PCs" EntitySet="PCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PCs_PCStatuses" Association="Self.FK_PCs_PCStatuses">
+            <End Role="PCStatuses" EntitySet="PCStatuses" />
+            <End Role="PCs" EntitySet="PCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserTypes" Association="Self.FK_Users_UserTypes">
+            <End Role="UserTypes" EntitySet="UserTypes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ComplainCenterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ComplainStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Complains" Relationship="Self.FK_Complains_ComplainStatuses" FromRole="ComplainStatuses" ToRole="Complains" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="Binary" MaxLength="50" FixedLength="false" />
+          <NavigationProperty Name="Complains" Relationship="Self.FK_Complains_Locations" FromRole="Locations" ToRole="Complains" />
+          <NavigationProperty Name="PCs" Relationship="Self.FK_PCs_Locations" FromRole="Locations" ToRole="PCs" />
+        </EntityType>
+        <EntityType Name="PC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationId" Type="Int32" />
+          <Property Name="PCStatusId" Type="Int32" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_PCs_Locations" FromRole="PCs" ToRole="Locations" />
+          <NavigationProperty Name="Complains" Relationship="Self.FK_Complains_PCs" FromRole="PCs" ToRole="Complains" />
+          <NavigationProperty Name="PCStatus" Relationship="Self.FK_PCs_PCStatuses" FromRole="PCs" ToRole="PCStatuses" />
+        </EntityType>
+        <EntityType Name="PCStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PCs" Relationship="Self.FK_PCs_PCStatuses" FromRole="PCStatuses" ToRole="PCs" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserTypeId" Type="Int32" />
+          <NavigationProperty Name="Complains" Relationship="Self.FK_Complains_Users" FromRole="Users" ToRole="Complains" />
+          <NavigationProperty Name="Complains1" Relationship="Self.FK_Complains_Users1" FromRole="Users" ToRole="Complains" />
+          <NavigationProperty Name="Complains2" Relationship="Self.FK_Complains_Users2" FromRole="Users" ToRole="Complains" />
+          <NavigationProperty Name="Complains3" Relationship="Self.FK_Complains_Users3" FromRole="Users" ToRole="Complains" />
+          <NavigationProperty Name="Complains4" Relationship="Self.FK_Complains_Users4" FromRole="Users" ToRole="Complains" />
+          <NavigationProperty Name="UserType" Relationship="Self.FK_Users_UserTypes" FromRole="Users" ToRole="UserTypes" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_UserTypes" FromRole="UserTypes" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Complain">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResolvedById" Type="Int32" />
+          <Property Name="ResolvedDate" Type="DateTime" Precision="0" />
+          <Property Name="AssignedById" Type="Int32" />
+          <Property Name="AssignedToId" Type="Int32" />
+          <Property Name="ComplainById" Type="Int32" />
+          <Property Name="UpdateById" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ComplainDate" Type="DateTime" Precision="0" />
+          <Property Name="LocationId" Type="Int32" />
+          <Property Name="ComplainStatusId" Type="Int32" />
+          <Property Name="PCId" Type="Int32" />
+          <NavigationProperty Name="ComplainStatus" Relationship="Self.FK_Complains_ComplainStatuses" FromRole="Complains" ToRole="ComplainStatuses" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Complains_Locations" FromRole="Complains" ToRole="Locations" />
+          <NavigationProperty Name="PC" Relationship="Self.FK_Complains_PCs" FromRole="Complains" ToRole="PCs" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Complains_Users" FromRole="Complains" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Complains_Users1" FromRole="Complains" ToRole="Users" />
+          <NavigationProperty Name="User2" Relationship="Self.FK_Complains_Users2" FromRole="Complains" ToRole="Users" />
+          <NavigationProperty Name="User3" Relationship="Self.FK_Complains_Users3" FromRole="Complains" ToRole="Users" />
+          <NavigationProperty Name="User4" Relationship="Self.FK_Complains_Users4" FromRole="Complains" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_Complains_ComplainStatuses">
+          <End Role="ComplainStatuses" Type="Self.ComplainStatus" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComplainStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="ComplainStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_Locations">
+          <End Role="Locations" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PCs_Locations">
+          <End Role="Locations" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="PCs" Type="Self.PC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PCs">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_PCs">
+          <End Role="PCs" Type="Self.PC" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PCs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="PCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PCs_PCStatuses">
+          <End Role="PCStatuses" Type="Self.PCStatus" Multiplicity="0..1" />
+          <End Role="PCs" Type="Self.PC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PCStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PCs">
+              <PropertyRef Name="PCStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="ResolvedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_Users1">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="AssignedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_Users2">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="AssignedToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_Users3">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="ComplainById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complains_Users4">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Complains" Type="Self.Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complains">
+              <PropertyRef Name="UpdateById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserTypes">
+          <End Role="UserTypes" Type="Self.UserType" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ComplainCenterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ComplainStatuses" EntityType="Self.ComplainStatus" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="PCs" EntityType="Self.PC" />
+          <EntitySet Name="PCStatuses" EntityType="Self.PCStatus" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+          <EntitySet Name="Complains" EntityType="Self.Complain" />
+          <AssociationSet Name="FK_Complains_ComplainStatuses" Association="Self.FK_Complains_ComplainStatuses">
+            <End Role="ComplainStatuses" EntitySet="ComplainStatuses" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_Locations" Association="Self.FK_Complains_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PCs_Locations" Association="Self.FK_PCs_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="PCs" EntitySet="PCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_PCs" Association="Self.FK_Complains_PCs">
+            <End Role="PCs" EntitySet="PCs" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PCs_PCStatuses" Association="Self.FK_PCs_PCStatuses">
+            <End Role="PCStatuses" EntitySet="PCStatuses" />
+            <End Role="PCs" EntitySet="PCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_Users" Association="Self.FK_Complains_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_Users1" Association="Self.FK_Complains_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_Users2" Association="Self.FK_Complains_Users2">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_Users3" Association="Self.FK_Complains_Users3">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complains_Users4" Association="Self.FK_Complains_Users4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Complains" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserTypes" Association="Self.FK_Users_UserTypes">
+            <End Role="UserTypes" EntitySet="UserTypes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ComplainCenterModelStoreContainer" CdmEntityContainer="ComplainCenterEntities">
+          <EntitySetMapping Name="ComplainStatuses">
+            <EntityTypeMapping TypeName="ComplainCenterModel.ComplainStatus">
+              <MappingFragment StoreEntitySet="ComplainStatuses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="ComplainCenterModel.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PCs">
+            <EntityTypeMapping TypeName="ComplainCenterModel.PC">
+              <MappingFragment StoreEntitySet="PCs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="PCStatusId" ColumnName="PCStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PCStatuses">
+            <EntityTypeMapping TypeName="ComplainCenterModel.PCStatus">
+              <MappingFragment StoreEntitySet="PCStatuses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ComplainCenterModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="ComplainCenterModel.UserType">
+              <MappingFragment StoreEntitySet="UserTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Complains">
+            <EntityTypeMapping TypeName="ComplainCenterModel.Complain">
+              <MappingFragment StoreEntitySet="Complains">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ResolvedById" ColumnName="ResolvedById" />
+                <ScalarProperty Name="ResolvedDate" ColumnName="ResolvedDate" />
+                <ScalarProperty Name="AssignedById" ColumnName="AssignedById" />
+                <ScalarProperty Name="AssignedToId" ColumnName="AssignedToId" />
+                <ScalarProperty Name="ComplainById" ColumnName="ComplainById" />
+                <ScalarProperty Name="UpdateById" ColumnName="UpdateById" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ComplainDate" ColumnName="ComplainDate" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="ComplainStatusId" ColumnName="ComplainStatusId" />
+                <ScalarProperty Name="PCId" ColumnName="PCId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
