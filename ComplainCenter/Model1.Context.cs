@@ -13,10 +13,10 @@ namespace ComplainCenter
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ComplainCenterEntities : DbContext
+    public partial class ComplainCenterEntities1 : DbContext
     {
-        public ComplainCenterEntities()
-            : base("name=ComplainCenterEntities")
+        public ComplainCenterEntities1()
+            : base("name=ComplainCenterEntities1")
         {
         }
     

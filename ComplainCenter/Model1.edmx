@@ -39,7 +39,7 @@ warning 6002: The table/view 'ComplainCenter.dbo.Complains' does not have a prim
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varbinary" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PCs">
           <Key>
@@ -295,7 +295,7 @@ FROM [dbo].[Complains] AS [Complains]</DefiningQuery>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Complains" Relationship="Self.FK_Complains_Locations" FromRole="Locations" ToRole="Complains" />
           <NavigationProperty Name="PCs" Relationship="Self.FK_PCs_Locations" FromRole="Locations" ToRole="PCs" />
         </EntityType>
@@ -365,11 +365,11 @@ FROM [dbo].[Complains] AS [Complains]</DefiningQuery>
           <NavigationProperty Name="ComplainStatus" Relationship="Self.FK_Complains_ComplainStatuses" FromRole="Complains" ToRole="ComplainStatuses" />
           <NavigationProperty Name="Location" Relationship="Self.FK_Complains_Locations" FromRole="Complains" ToRole="Locations" />
           <NavigationProperty Name="PC" Relationship="Self.FK_Complains_PCs" FromRole="Complains" ToRole="PCs" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Complains_Users" FromRole="Complains" ToRole="Users" />
-          <NavigationProperty Name="User1" Relationship="Self.FK_Complains_Users1" FromRole="Complains" ToRole="Users" />
-          <NavigationProperty Name="User2" Relationship="Self.FK_Complains_Users2" FromRole="Complains" ToRole="Users" />
-          <NavigationProperty Name="User3" Relationship="Self.FK_Complains_Users3" FromRole="Complains" ToRole="Users" />
-          <NavigationProperty Name="User4" Relationship="Self.FK_Complains_Users4" FromRole="Complains" ToRole="Users" />
+          <NavigationProperty Name="Resolver" Relationship="Self.FK_Complains_Users" FromRole="Complains" ToRole="Users" />
+          <NavigationProperty Name="Assigner" Relationship="Self.FK_Complains_Users1" FromRole="Complains" ToRole="Users" />
+          <NavigationProperty Name="Assignee" Relationship="Self.FK_Complains_Users2" FromRole="Complains" ToRole="Users" />
+          <NavigationProperty Name="Complainer" Relationship="Self.FK_Complains_Users3" FromRole="Complains" ToRole="Users" />
+          <NavigationProperty Name="Updater" Relationship="Self.FK_Complains_Users4" FromRole="Complains" ToRole="Users" />
         </EntityType>
         <Association Name="FK_Complains_ComplainStatuses">
           <End Role="ComplainStatuses" Type="Self.ComplainStatus" Multiplicity="0..1" />
@@ -503,7 +503,7 @@ FROM [dbo].[Complains] AS [Complains]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ComplainCenterEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ComplainCenterEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ComplainStatuses" EntityType="Self.ComplainStatus" />
           <EntitySet Name="Locations" EntityType="Self.Location" />
           <EntitySet Name="PCs" EntityType="Self.PC" />
@@ -561,7 +561,7 @@ FROM [dbo].[Complains] AS [Complains]</DefiningQuery>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ComplainCenterModelStoreContainer" CdmEntityContainer="ComplainCenterEntities">
+        <EntityContainerMapping StorageEntityContainer="ComplainCenterModelStoreContainer" CdmEntityContainer="ComplainCenterEntities1">
           <EntitySetMapping Name="ComplainStatuses">
             <EntityTypeMapping TypeName="ComplainCenterModel.ComplainStatus">
               <MappingFragment StoreEntitySet="ComplainStatuses">

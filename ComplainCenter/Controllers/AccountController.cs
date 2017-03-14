@@ -10,7 +10,7 @@ namespace ComplainCenter.Controllers
    
     public class AccountController : Controller
     {
-        ComplainCenterEntities db = new ComplainCenterEntities();
+        ComplainCenterEntities1 db = new ComplainCenterEntities1();
         //
         // GET: /Account/
 

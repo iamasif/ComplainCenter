@@ -21,7 +21,7 @@ namespace ComplainCenter
         }
     
         public int Id { get; set; }
-        public byte[] Name { get; set; }
+        public string Name { get; set; }
     
         public virtual ICollection<Complain> Complains { get; set; }
         public virtual ICollection<PC> PCs { get; set; }
