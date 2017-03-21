@@ -4,9 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ComplainCenterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ComplainCenter.dbo.Complains' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+    <Schema Namespace="ComplainCenterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Complains">
           <Key>
             <PropertyRef Name="Id" />
@@ -207,31 +205,13 @@ warning 6002: The table/view 'ComplainCenter.dbo.Complains' does not have a prim
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ComplainCenterModelStoreContainer">
+          <EntitySet Name="Complains" EntityType="Self.Complains" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComplainStatuses" EntityType="Self.ComplainStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PCs" EntityType="Self.PCs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PCStatuses" EntityType="Self.PCStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTypes" EntityType="Self.UserTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Complains" EntityType="Self.Complains" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[Complains].[Id] AS [Id], 
-[Complains].[Title] AS [Title], 
-[Complains].[Description] AS [Description], 
-[Complains].[ResolvedById] AS [ResolvedById], 
-[Complains].[ResolvedDate] AS [ResolvedDate], 
-[Complains].[AssignedById] AS [AssignedById], 
-[Complains].[AssignedToId] AS [AssignedToId], 
-[Complains].[ComplainById] AS [ComplainById], 
-[Complains].[UpdateById] AS [UpdateById], 
-[Complains].[UpdatedDate] AS [UpdatedDate], 
-[Complains].[Code] AS [Code], 
-[Complains].[ComplainDate] AS [ComplainDate], 
-[Complains].[LocationId] AS [LocationId], 
-[Complains].[ComplainStatusId] AS [ComplainStatusId], 
-[Complains].[PCId] AS [PCId]
-FROM [dbo].[Complains] AS [Complains]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Complains_ComplainStatuses" Association="Self.FK_Complains_ComplainStatuses">
             <End Role="ComplainStatuses" EntitySet="ComplainStatuses" />
             <End Role="Complains" EntitySet="Complains" />
@@ -277,8 +257,7 @@ FROM [dbo].[Complains] AS [Complains]</DefiningQuery>
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ComplainCenterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3bddcef5e56c408ba234a275e2ce1b20" Name="Diagram1">
+      <Diagram DiagramId="3bddcef5e56c408ba234a275e2ce1b20" Name="Diagram1" ZoomLevel="131">
         <EntityTypeShape EntityType="ComplainCenterModel.ComplainStatus" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ComplainCenterModel.Location" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ComplainCenterModel.PC" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
